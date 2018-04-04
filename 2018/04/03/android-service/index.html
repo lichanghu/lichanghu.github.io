@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Mr.Neal">
 <meta property="og:description" content="1. Service是什么Service(服务)是一个一种可以在后台执行长时间运行操作而没有用户界面的应用组件. 2. Service与Thread的区别">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-04T02:40:09.787Z">
+<meta property="og:updated_time" content="2018-04-04T08:21:20.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Service">
 <meta name="twitter:description" content="1. Service是什么Service(服务)是一个一种可以在后台执行长时间运行操作而没有用户界面的应用组件. 2. Service与Thread的区别">
@@ -195,6 +195,23 @@
 <li>应用场景<ul>
 <li>Thread:当要执行耗时的网络或者数据库查询以及其他阻塞UI线程或密集使用CPU的任务时,都应该使用工作线程(Thread)这样才能保证UI线程不被占用而影响用户体验.</li>
 <li>Service:在应用程序中,如果需要长时间的在后台运行,而且不需要交互的情况下,使用服务.比如播放音乐,通过Service+Notification方式在后台执行同时在通知栏显示着.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-Service创建服务"><a href="#3-Service创建服务" class="headerlink" title="3. Service创建服务"></a>3. Service创建服务</h2><ul>
+<li><p>startService</p>
+<ul>
+<li>定义一个类继承service</li>
+<li>在Manifest.xml文件中配置service</li>
+<li>使用Context的startService(Intent)方法启动Service</li>
+<li>不再使用时,调用soptService(Intent)方法停止该服务</li>
+</ul>
+</li>
+<li><p>bindService</p>
+<ul>
+<li>创建BindService服务端,继承自Service并在类中,创建一个实现IBinder接口的实例对象并提供公共方法给客户端调用.</li>
+<li>从onBind()回调方法返回此Binder实例</li>
+<li>在客户端中,从onServiceConnected()回调方法接收Binder,并使用提供的方法调用绑定服务.</li>
 </ul>
 </li>
 </ul>
