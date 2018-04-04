@@ -6,20 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Service | Mr.Neal</title>
+  <title>android-binder | Mr.Neal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. Service是什么Service(服务)是一个一种可以在后台执行长时间运行操作而没有用户界面的应用组件. 2. Service与Thread的区别">
-<meta name="keywords" content="随笔,android">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Service">
-<meta property="og:url" content="http://yoursite.com/2018/04/03/android-service/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="android-binder">
+<meta property="og:url" content="http://yoursite.com/2018/04/04/android-binder/index.html">
 <meta property="og:site_name" content="Mr.Neal">
-<meta property="og:description" content="1. Service是什么Service(服务)是一个一种可以在后台执行长时间运行操作而没有用户界面的应用组件. 2. Service与Thread的区别">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-04T02:40:09.787Z">
+<meta property="og:updated_time" content="2018-04-04T01:56:11.182Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Service">
-<meta name="twitter:description" content="1. Service是什么Service(服务)是一个一种可以在后台执行长时间运行操作而没有用户界面的应用组件. 2. Service与Thread的区别">
+<meta name="twitter:title" content="android-binder">
   
     <link rel="alternative" href="/atom.xml" title="Mr.Neal" type="application/atom+xml">
   
@@ -159,46 +155,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-android-service" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-android-binder" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Service
+      android-binder
     </h1>
   
 
         
-        <a href="/2018/04/03/android-service/" class="archive-article-date">
-  	<time datetime="2018-04-03T06:26:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-03</time>
+        <a href="/2018/04/04/android-binder/" class="archive-article-date">
+  	<time datetime="2018-04-04T01:56:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-Service是什么"><a href="#1-Service是什么" class="headerlink" title="1. Service是什么"></a>1. Service是什么</h2><p>Service(服务)是一个一种可以在后台执行长时间运行操作而没有用户界面的应用组件.</p>
-<h2 id="2-Service与Thread的区别"><a href="#2-Service与Thread的区别" class="headerlink" title="2. Service与Thread的区别"></a>2. Service与Thread的区别</h2><a id="more"></a>
-<ul>
-<li>定义<ul>
-<li>Thread:是程序执行的最小单元,它是分配CPU的单位,Android系统中UI线程的一种,当然Thread还可以用于执行一些耗时异步的操作.</li>
-<li>Service:是Android的一种机制,服务是运行在主线程,不能做耗时操作,它是由系统进程托管.它是一种轻量级的IPC通信.ActivityService是在不同的进程中.它们的通信需要IPC通信进行操作.</li>
-</ul>
-</li>
-<li>实际开发 <ul>
-<li>Thread:在Android系统中,线程一般是指工作线程,后台线程,一般进行耗时操作.而主线程是一种特殊的工作线程, 它只是负责处理一些UI线程的绘制,UI线程不能做耗时操作.</li>
-<li>Service:是Android系统中的组件,一般情况运行在主线程上的,因此在Service中是不可以执行耗时操作的,否则系统会报ANR异常,之所以称Service为后台服务,大部分原因是它本身没有UI,用户无法感知,但如果需要让Service执行耗时任务,可在Service中开启单独线程去执行.</li>
-</ul>
-</li>
-<li>应用场景<ul>
-<li>Thread:当要执行耗时的网络或者数据库查询以及其他阻塞UI线程或密集使用CPU的任务时,都应该使用工作线程(Thread)这样才能保证UI线程不被占用而影响用户体验.</li>
-<li>Service:在应用程序中,如果需要长时间的在后台运行,而且不需要交互的情况下,使用服务.比如播放音乐,通过Service+Notification方式在后台执行同时在通知栏显示着.</li>
-</ul>
-</li>
-</ul>
-
+        
       
 
       
@@ -227,21 +204,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -292,7 +254,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/03/android-service/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/04/android-binder/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -306,18 +268,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/04/03/android-broadcast/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          android-broadcast
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/02/android-fragment/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Fragment</div>
+    <a href="/2018/04/03/android-webview/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">android-webview</div>
       <i class="icon-circle-right"></i>
     </a>
   

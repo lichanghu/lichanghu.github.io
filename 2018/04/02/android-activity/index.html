@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Activity | Mr.Neal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 什么是activity?activity本身是用户能够操作的活动界面 2. activity的4种状态? running">
+  <meta name="description" content="1. 什么是activity?activity本身是用户能够操作的活动界面 2. activity的4种状态?">
 <meta name="keywords" content="随笔,android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Activity">
 <meta property="og:url" content="http://yoursite.com/2018/04/02/android-activity/index.html">
 <meta property="og:site_name" content="Mr.Neal">
-<meta property="og:description" content="1. 什么是activity?activity本身是用户能够操作的活动界面 2. activity的4种状态? running">
+<meta property="og:description" content="1. 什么是activity?activity本身是用户能够操作的活动界面 2. activity的4种状态?">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-03T09:24:35.140Z">
+<meta property="og:updated_time" content="2018-04-04T03:08:58.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Activity">
-<meta name="twitter:description" content="1. 什么是activity?activity本身是用户能够操作的活动界面 2. activity的4种状态? running">
+<meta name="twitter:description" content="1. 什么是activity?activity本身是用户能够操作的活动界面 2. activity的4种状态?">
   
     <link rel="alternative" href="/atom.xml" title="Mr.Neal" type="application/atom+xml">
   
@@ -180,17 +180,79 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-什么是activity"><a href="#1-什么是activity" class="headerlink" title="1. 什么是activity?"></a>1. 什么是activity?</h2><p>activity本身是用户能够操作的活动界面</p>
-<h2 id="2-activity的4种状态"><a href="#2-activity的4种状态" class="headerlink" title="2. activity的4种状态?"></a>2. activity的4种状态?</h2><ol>
-<li>running <a id="more"></a>
-activity活动状态用户可以交互的一种状态,它一个处于栈顶的状态</li>
-<li>paused<br>activity失去焦点或者非全屏的activity占据再或者被一个透明的activity放置在栈顶它会处于paused状态,<br>它只是失去了用户对它的交互,并不是说它被销毁了,但一种情况是在内存不够的时候被系统回收.</li>
-<li>stopped<br>当一个activity全屏覆盖了另一个activity的时候它处于stopped状态,这个时候它不是在可见的,<br>如果内存不够的时候它会被系统回收.</li>
-<li>killed<br>它已经被系统回收掉了.它保存的信息状态成员变量全部不存在了.<h2 id="3-activity的生命周期"><a href="#3-activity的生命周期" class="headerlink" title="3. activity的生命周期?"></a>3. activity的生命周期?</h2>onCreate()方法:<br>activity被创建的时候回调生命周期第一个调用的方法.在里面做一些初始化操作,<br>设置一些布局的资源当然也可以做些数据的加载,图片的预加载.<br>onStart()方法:<br>表明activity正在启动,activity已经处于用户可见状态,没有处于前台显示,不可以交互<br>onResume()方法:<br>表明activity已经处于用户可见状态,处于前台显示状态,可以与用户进行交互.<br>onPause()方法:<br>表明activity已经处于暂停状态,activity可见状态,不可以交互.<br>onStop()方法:<br>表明activity已经处于停止状态,activity不可见状态,不可以交互.没有被销毁<br>onDestroy()方法:<br>表明activity已经被销毁,activity不可见状态.<br>onRestart()方法:<br>表明activity重新开始.如果activity没有被销毁重新调用.<br>activity启动 -&gt; onCreate() -&gt; onStart() -&gt; onResume()<br>点击home键回到主界面 -&gt; onPause() -&gt; onStop()<br>当我们再次回到原activity时 -&gt; onRestart() -&gt; onStart() -&gt; onResume()<br>退出当前activity时 -&gt; onPause() -&gt; onStop() -&gt; onDestroy()<br>activity切换时 -&gt; (A)onPause -&gt; (B)onCreate -&gt; (B)onStart -&gt; (B)onResume -&gt; (A)onStop<h2 id="3-activity的启动模式"><a href="#3-activity的启动模式" class="headerlink" title="3. activity的启动模式"></a>3. activity的启动模式</h2></li>
-<li>standard 标准模式<br>默认启动模式,每次启动一个Activity都会又一次创建一个新的实例入栈，无论这个实例是否存在.</li>
-<li>singleTop 栈顶复用模式<br>分两种处理情况：须要创建的Activity已经处于栈顶时,此时会直接复用栈顶的Activity.不会再创建新的Activity,<br>若须要创建的Activity不处于栈顶,此时会又一次创建一个新的Activity入栈，同Standard模式一样.<br>若情况一中栈顶的Activity被直接复用时,它的onCreate、onStart不会被系统调用,由于它并没有发生改变.<br>可是一个新的方法 onNewIntent会被回调（Activity被正常创建时不会回调此方法).</li>
-<li>singleTask 栈内复用模式<br>若须要创建的Activity已经处于栈中时,此时不会创建新的Activity,而是将存在栈中的Activity上面的其他Activity所有销毁,使它成为栈顶.<br>同SingleTop 模式中的情况一同样,仅仅会又一次回调Activity中的 onNewIntent方法.</li>
-<li>singleInstance 单实例模式<br>SingleInstance比较特殊,是全局单例模式,是一种加强的SingleTask模式.它除了具有它所有特性外,<br>还加强了一点：具有此模式的Activity仅仅能单独位于一个任务栈中.<h2 id="4-scheme协议"><a href="#4-scheme协议" class="headerlink" title="4. scheme协议"></a>4. scheme协议</h2>android中scheme是一种页面内跳转协议,是一种非常好的实现机制,通过定义自己的scheme协议,<br>可以非常方便跳转app中的各个页面;通过scheme协议,服务器可以定制化告诉app跳转到那个页面,<br>可以通过通知栏消息定制化跳转页面,可以通过H5页面跳转到页面等.</li>
-</ol>
+<h2 id="2-activity的4种状态"><a href="#2-activity的4种状态" class="headerlink" title="2. activity的4种状态?"></a>2. activity的4种状态?</h2><a id="more"></a>
+<ul>
+<li>running <ul>
+<li>activity活动状态用户可以交互的一种状态,它一个处于栈顶的状态</li>
+</ul>
+</li>
+<li>paused<ul>
+<li>activity失去焦点或者非全屏的activity占据再或者被一个透明的activity放置在栈顶它会处于paused状态,它只是失去了用户对它的交互,并不是说它被销毁了,但一种情况是在内存不够的时候被系统回收.</li>
+</ul>
+</li>
+<li>stopped<ul>
+<li>当一个activity全屏覆盖了另一个activity的时候它处于stopped状态,这个时候它不是在可见的,如果内存不够的时候它会被系统回收.</li>
+</ul>
+</li>
+<li>killed<ul>
+<li>它已经被系统回收掉了.它保存的信息状态成员变量全部不存在了.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-activity的生命周期"><a href="#3-activity的生命周期" class="headerlink" title="3. activity的生命周期?"></a>3. activity的生命周期?</h2><ul>
+<li>onCreate()方法:<ul>
+<li>activity被创建的时候回调生命周期第一个调用的方法.在里面做一些初始化操作,设置一些布局的资源当然也可以做些数据的加载,图片的预加载.</li>
+</ul>
+</li>
+<li>onStart()方法:<ul>
+<li>表明activity正在启动,activity已经处于用户可见状态,没有处于前台显示,不可以交互</li>
+</ul>
+</li>
+<li>onResume()方法:<ul>
+<li>表明activity已经处于用户可见状态,处于前台显示状态,可以与用户进行交互.</li>
+</ul>
+</li>
+<li>onPause()方法:<ul>
+<li>表明activity已经处于暂停状态,activity可见状态,不可以交互.</li>
+</ul>
+</li>
+<li>onStop()方法:<ul>
+<li>表明activity已经处于停止状态,activity不可见状态,不可以交互.没有被销毁</li>
+</ul>
+</li>
+<li>onDestroy()方法:<ul>
+<li>表明activity已经被销毁,activity不可见状态.</li>
+</ul>
+</li>
+<li>onRestart()方法:<ul>
+<li>表明activity重新开始.如果activity没有被销毁重新调用.</li>
+</ul>
+</li>
+<li>activity启动 -&gt; onCreate() -&gt; onStart() -&gt; onResume() </li>
+<li>点击home键回到主界面 -&gt; onPause() -&gt; onStop()</li>
+<li>当我们再次回到原activity时 -&gt; onRestart() -&gt; onStart() -&gt; onResume()</li>
+<li>退出当前activity时 -&gt; onPause() -&gt; onStop() -&gt; onDestroy()</li>
+<li>activity切换时 -&gt; (A)onPause -&gt; (B)onCreate -&gt; (B)onStart -&gt; (B)onResume -&gt; (A)onStop</li>
+</ul>
+<h2 id="4-activity的启动模式"><a href="#4-activity的启动模式" class="headerlink" title="4. activity的启动模式"></a>4. activity的启动模式</h2><ul>
+<li>standard 标准模式<ul>
+<li>默认启动模式,每次启动一个Activity都会又一次创建一个新的实例入栈，无论这个实例是否存在.</li>
+</ul>
+</li>
+<li>singleTop 栈顶复用模式<ul>
+<li>分两种处理情况：须要创建的Activity已经处于栈顶时,此时会直接复用栈顶的Activity.不会再创建新的Activity,若须要创建的Activity不处于栈顶,此时会又一次创建一个新的Activity入栈，同Standard模式一样.若情况一中栈顶的Activity被直接复用时,它的onCreate、onStart不会被系统调用,由于它并没有发生改变.可是一个新的方法 onNewIntent会被回调（Activity被正常创建时不会回调此方法).</li>
+</ul>
+</li>
+<li>singleTask 栈内复用模式<ul>
+<li>若须要创建的Activity已经处于栈中时,此时不会创建新的Activity,而是将存在栈中的Activity上面的其他Activity所有销毁,使它成为栈顶.同SingleTop 模式中的情况一同样,仅仅会又一次回调Activity中的 onNewIntent方法.</li>
+</ul>
+</li>
+<li>singleInstance 单实例模式<ul>
+<li>SingleInstance比较特殊,是全局单例模式,是一种加强的SingleTask模式.它除了具有它所有特性外,还加强了一点：具有此模式的Activity仅仅能单独位于一个任务栈中.</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-scheme协议"><a href="#5-scheme协议" class="headerlink" title="5. scheme协议"></a>5. scheme协议</h2><p>android中scheme是一种页面内跳转协议,是一种非常好的实现机制,通过定义自己的scheme协议,<br>可以非常方便跳转app中的各个页面;通过scheme协议,服务器可以定制化告诉app跳转到那个页面,<br>可以通过通知栏消息定制化跳转页面,可以通过H5页面跳转到页面等.</p>
 
       
 
