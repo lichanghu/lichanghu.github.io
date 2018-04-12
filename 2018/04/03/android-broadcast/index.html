@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Broadcast | Mr.Neal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.广播的定义 在Android中,Broadcast是一种广泛运用的在应用程序之间传输信息的机制,Android中我们要发送的广播内容是一个Intent,这个Intent中可以携带我们要传送的数据.">
+  <meta name="description" content="1. 广播的定义 在Android中,Broadcast是一种广泛运用的在应用程序之间传输信息的机制,Android中我们要发送的广播内容是一个Intent,这个Intent中可以携带我们要传送的数据.">
 <meta name="keywords" content="随笔,android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Broadcast">
 <meta property="og:url" content="http://yoursite.com/2018/04/03/android-broadcast/index.html">
 <meta property="og:site_name" content="Mr.Neal">
-<meta property="og:description" content="1.广播的定义 在Android中,Broadcast是一种广泛运用的在应用程序之间传输信息的机制,Android中我们要发送的广播内容是一个Intent,这个Intent中可以携带我们要传送的数据.">
+<meta property="og:description" content="1. 广播的定义 在Android中,Broadcast是一种广泛运用的在应用程序之间传输信息的机制,Android中我们要发送的广播内容是一个Intent,这个Intent中可以携带我们要传送的数据.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T03:29:36.915Z">
+<meta property="og:updated_time" content="2018-04-12T03:31:27.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Broadcast">
-<meta name="twitter:description" content="1.广播的定义 在Android中,Broadcast是一种广泛运用的在应用程序之间传输信息的机制,Android中我们要发送的广播内容是一个Intent,这个Intent中可以携带我们要传送的数据.">
+<meta name="twitter:description" content="1. 广播的定义 在Android中,Broadcast是一种广泛运用的在应用程序之间传输信息的机制,Android中我们要发送的广播内容是一个Intent,这个Intent中可以携带我们要传送的数据.">
   
     <link rel="alternative" href="/atom.xml" title="Mr.Neal" type="application/atom+xml">
   
@@ -179,35 +179,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-广播的定义"><a href="#1-广播的定义" class="headerlink" title="1.广播的定义"></a>1.广播的定义</h2><ul>
+        <h2 id="1-广播的定义"><a href="#1-广播的定义" class="headerlink" title="1. 广播的定义"></a>1. 广播的定义</h2><ul>
 <li>在Android中,Broadcast是一种广泛运用的在应用程序之间传输信息的机制,Android中我们要发送的广播内容是一个Intent,这个Intent中可以携带我们要传送的数据.<a id="more"></a>
-<h2 id="2-广播的使用场景"><a href="#2-广播的使用场景" class="headerlink" title="2.广播的使用场景"></a>2.广播的使用场景</h2></li>
+<h2 id="2-广播的使用场景"><a href="#2-广播的使用场景" class="headerlink" title="2. 广播的使用场景"></a>2. 广播的使用场景</h2></li>
 <li>同一app具有多个进程的不同组件之间的消息通信</li>
 <li>不同app之间的组件之间的消息通信</li>
 </ul>
-<h2 id="3-广播种类"><a href="#3-广播种类" class="headerlink" title="3.广播种类"></a>3.广播种类</h2><ul>
+<h2 id="3-广播种类"><a href="#3-广播种类" class="headerlink" title="3. 广播种类"></a>3. 广播种类</h2><ul>
 <li>Normal Broadcast(普通广播): Context.sendBroadcast</li>
 <li>System Broadcast(系统广播): Context.sendBroadcast</li>
 <li>Ordered Broadcast(有序广播):Context.sendOrdereBroadcast</li>
 <li>Local Broadcast: 只在自身App内传播</li>
 </ul>
-<h2 id="4-实现广播"><a href="#4-实现广播" class="headerlink" title="4.实现广播"></a>4.实现广播</h2><ul>
+<h2 id="4-实现广播"><a href="#4-实现广播" class="headerlink" title="4. 实现广播"></a>4. 实现广播</h2><ul>
 <li>静态注册:注册完成一直运行</li>
 <li>动态注册:跟随activity的生命周期</li>
 </ul>
-<h2 id="5-内部实现机制"><a href="#5-内部实现机制" class="headerlink" title="5.内部实现机制"></a>5.内部实现机制</h2><ul>
+<h2 id="5-内部实现机制"><a href="#5-内部实现机制" class="headerlink" title="5. 内部实现机制"></a>5. 内部实现机制</h2><ul>
 <li>自定义广播接收者BroadcastReceiver,并复写onReceiver()方法</li>
 <li>通过Binder机制向AMS(Activity Manager Service)进行注册</li>
 <li>广播发送者通过Binder机制向AMS发送广播</li>
 <li>AMS查找符合相应条件(IntentFilter/Permission等)的BroadcastReceiver,将广播发送到BroadcastReceiver(一般情况下是Actvitiy)相应对列中</li>
 <li>消息循环执行拿到些广播,回调BroadcastReceiver中的onReceive()方法</li>
 </ul>
-<h2 id="6-LocalBroadcastManager优势"><a href="#6-LocalBroadcastManager优势" class="headerlink" title="6.LocalBroadcastManager优势"></a>6.LocalBroadcastManager优势</h2><ul>
+<h2 id="6-LocalBroadcastManager优势"><a href="#6-LocalBroadcastManager优势" class="headerlink" title="6. LocalBroadcastManager优势"></a>6. LocalBroadcastManager优势</h2><ul>
 <li>使用它发送的广播只在自身App内传播,因此你不必担心泄露隐私数据</li>
 <li>其它App无法对你的App发送该广播,因为你的App根本就不可能接收到非自身应用发送的该广播,因此你不必担心有安全漏洞可以利用</li>
 <li>比系统的全局广播更高效</li>
 </ul>
-<h2 id="7-LocalBroadcastManager详解"><a href="#7-LocalBroadcastManager详解" class="headerlink" title="7.LocalBroadcastManager详解"></a>7.LocalBroadcastManager详解</h2><ul>
+<h2 id="7-LocalBroadcastManager详解"><a href="#7-LocalBroadcastManager详解" class="headerlink" title="7. LocalBroadcastManager详解"></a>7. LocalBroadcastManager详解</h2><ul>
 <li>LocalBroadcastManager高效的原因主要是因为它内部是通过Handler实现的,它的sendBroadcast()方法含义并非和我们平时所用的一样,它的sendBroadcast()方法其实是通过handler发送一个Message实现的</li>
 <li>既然是它内部是通过Handler来实现广播的发送的,那么相比与系统广播通过Binder实现那肯定是更高效,同时使用Handler来实现,别的应用无法向我们的应用发送该广播,而我们应用内发送的广播也不会离开我们的应用</li>
 <li>LocalBroadcastManager内部协作主要是靠这两个Map集合:mReceivers和Actions,当然还有一个List集合mPendingBroadcasts,这个主要就是存储待接收的广播对象</li>
