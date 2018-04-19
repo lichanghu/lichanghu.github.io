@@ -253,6 +253,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <h2 id="1-WebView常见的问题"><a href="#1-WebView常见的问题" class="headerlink" title="1. WebView常见的问题"></a>1. WebView常见的问题</h2><ul>
+<li>Android API level 16以及之前的版本存在远程代码执行安全漏洞,该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法,远程攻击者通过使用Java Reflection API利用该漏洞执行任意Java对象的方法.</li>
+<li>WebView内存泄露的问题.
         
       
 

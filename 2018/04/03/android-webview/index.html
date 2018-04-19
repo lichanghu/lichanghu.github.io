@@ -8,15 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Webview | Mr.Neal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="随笔,android">
+  <meta name="description" content="1. WebView常见的问题 Android API level 16以及之前的版本存在远程代码执行安全漏洞,该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法,远程攻击者通过使用Java Reflection API利用该漏洞执行任意Java对象的方法. WebView内存泄露的问题.">
+<meta name="keywords" content="随笔,android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webview">
 <meta property="og:url" content="http://yoursite.com/2018/04/03/android-webview/index.html">
 <meta property="og:site_name" content="Mr.Neal">
+<meta property="og:description" content="1. WebView常见的问题 Android API level 16以及之前的版本存在远程代码执行安全漏洞,该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法,远程攻击者通过使用Java Reflection API利用该漏洞执行任意Java对象的方法. WebView内存泄露的问题.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-04T08:26:46.816Z">
+<meta property="og:updated_time" content="2018-04-19T04:00:18.800Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webview">
+<meta name="twitter:description" content="1. WebView常见的问题 Android API level 16以及之前的版本存在远程代码执行安全漏洞,该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法,远程攻击者通过使用Java Reflection API利用该漏洞执行任意Java对象的方法. WebView内存泄露的问题.">
   
     <link rel="alternative" href="/atom.xml" title="Mr.Neal" type="application/atom+xml">
   
@@ -176,7 +179,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="1-WebView常见的问题"><a href="#1-WebView常见的问题" class="headerlink" title="1. WebView常见的问题"></a>1. WebView常见的问题</h2><ul>
+<li>Android API level 16以及之前的版本存在远程代码执行安全漏洞,该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法,远程攻击者通过使用Java Reflection API利用该漏洞执行任意Java对象的方法.</li>
+<li>WebView内存泄露的问题.<a id="more"></a>
+<ul>
+<li>独立进程,开启单独的进程给WebView使用.需要用到进程之间通信,比较麻烦.</li>
+<li>动态去添加WebView,动态添加WebView意思在布局创建一个ViewGroup用来放置WebView,Activty创建时add添加进来,在Activity结束是remove掉.</li>
+</ul>
+</li>
+<li>WebView硬件加速导致页面渲染问题.在WebView加载的时候暂时关闭硬件加速.<h2 id="2-JsBridge"><a href="#2-JsBridge" class="headerlink" title="2. JsBridge"></a>2. JsBridge</h2></li>
+<li>是java和js互通框架WebViewJavascriptBridge是移动UIView和Html交互通信的桥梁,就是实现java和js的互相调用的桥梁,替代了WebView的自带的JavascriptInterface的接口,使得我们的开发更加灵活和安全.</li>
+</ul>
+
       
 
       
