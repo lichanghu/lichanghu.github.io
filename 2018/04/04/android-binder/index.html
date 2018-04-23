@@ -8,15 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Binder | Mr.Neal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="随笔,android">
+  <meta name="description" content="1.到底什么是Binder 通常意义下,Binder指的是一种通信机制,跨进程的通信机制 对于Server进程来说,Binder指的是Binder本地对象/对于Client来说,Binder指的是Binder代理对象 对于传输过程而言,Binder是可以进行跨进程的传递的对象.  2.Binder的架构 Binder IPC属于C/S 架构,包括Client,Driver,Server 三个部分">
+<meta name="keywords" content="随笔,android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Binder">
 <meta property="og:url" content="http://yoursite.com/2018/04/04/android-binder/index.html">
 <meta property="og:site_name" content="Mr.Neal">
+<meta property="og:description" content="1.到底什么是Binder 通常意义下,Binder指的是一种通信机制,跨进程的通信机制 对于Server进程来说,Binder指的是Binder本地对象/对于Client来说,Binder指的是Binder代理对象 对于传输过程而言,Binder是可以进行跨进程的传递的对象.  2.Binder的架构 Binder IPC属于C/S 架构,包括Client,Driver,Server 三个部分">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-04T08:26:35.307Z">
+<meta property="og:updated_time" content="2018-04-23T07:09:08.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Binder">
+<meta name="twitter:description" content="1.到底什么是Binder 通常意义下,Binder指的是一种通信机制,跨进程的通信机制 对于Server进程来说,Binder指的是Binder本地对象/对于Client来说,Binder指的是Binder代理对象 对于传输过程而言,Binder是可以进行跨进程的传递的对象.  2.Binder的架构 Binder IPC属于C/S 架构,包括Client,Driver,Server 三个部分">
   
     <link rel="alternative" href="/atom.xml" title="Mr.Neal" type="application/atom+xml">
   
@@ -176,7 +179,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="1-到底什么是Binder"><a href="#1-到底什么是Binder" class="headerlink" title="1.到底什么是Binder"></a>1.到底什么是Binder</h2><ul>
+<li>通常意义下,Binder指的是一种通信机制,跨进程的通信机制</li>
+<li>对于Server进程来说,Binder指的是Binder本地对象/对于Client来说,Binder指的是Binder代理对象</li>
+<li>对于传输过程而言,Binder是可以进行跨进程的传递的对象.</li>
+</ul>
+<h2 id="2-Binder的架构"><a href="#2-Binder的架构" class="headerlink" title="2.Binder的架构"></a>2.Binder的架构</h2><ul>
+<li>Binder IPC属于C/S 架构,包括Client,Driver,Server 三个部分</li>
+<li>Client可以手动调用Driver的transact 接口,也可以通过AIDL 生成的 Proxy调用</li>
+<li>Server中会启动一个线程池来处理Client的调用请求,处理完成后将结果返回给Driver,Driver再返回给Client</li>
+</ul>
+
       
 
       
