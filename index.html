@@ -156,6 +156,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-asyncTask" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/06/asyncTask/">AsyncTask</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/06/asyncTask/" class="archive-article-date">
+  	<time datetime="2018-04-06T06:29:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-什么是AsyncTack"><a href="#1-什么是AsyncTack" class="headerlink" title="1. 什么是AsyncTack"></a>1. 什么是AsyncTack</h2><ul>
+<li>它本质上就是一个封装了线程池和Handler的异步框架</li>
+</ul>
+<h2 id="2-AsyncTask的使用方法"><a href="#2-AsyncTask的使用方法" class="headerlink" title="2. AsyncTask的使用方法"></a>2. AsyncTask的使用方法</h2><ul>
+<li>三个参数<ul>
+<li>Integer -&gt; Params 表示后台任务执行时的参数类型,该参数会传给AysncTask的doInBackground()方法.</li>
+<li>Integer -&gt; Progress 表示后台任务的执行进度的参数类型,该参数会作为onProgressUpdate()方法的参数.</li>
+<li>String -&gt; Result 表示后台任务的返回结果的参数类型,该参数会作为onPostExecute()方法的参数.</li>
+</ul>
+</li>
+<li><p>五个方法</p>
+<ul>
+<li>onPreExecute():异步任务开启之前回调,在主线程中执行.</li>
+<li>doInBackground():执行异步任务,在线程池中执行.</li>
+<li>onProgressUpdate():当doInBackground中调用publishProgress时回调,在主线程中执行.</li>
+<li>onPostExecute():在异步任务执行之后回调,在主线程中执行.</li>
+<li>onCancelled():在异步任务被取消时回调.</li>
+</ul>
+<h2 id="3-AsyncTask的机制原理"><a href="#3-AsyncTask的机制原理" class="headerlink" title="3.AsyncTask的机制原理"></a>3.AsyncTask的机制原理</h2></li>
+<li>AsyncTask的本质是一个静态的线程池,AsyncTask派生出的子类可以实现不同的异步任务,这些任务都是提交到静态线程池中执行.</li>
+<li>线程池中的工作线程执行doInBackground(mParams)方法执行异步任务</li>
+<li><p>当任务状态改变之后,工作线程向UI线程发送消息,AsyncTask内部的InternalHander响应这些消息,并调相关的回调函数.</p>
+<h2 id="4-AsyncTask的内存泄露"><a href="#4-AsyncTask的内存泄露" class="headerlink" title="4.AsyncTask的内存泄露"></a>4.AsyncTask的内存泄露</h2></li>
+<li>原因: 非静态内部类持有外部类的匿名引用,导致Activity无法释放</li>
+<li><p>解决:</p>
+<ul>
+<li>AsyncTask内部持有外部Activity的弱引用</li>
+<li>AsyncTask改为静态内部类</li>
+<li>AsyncTask.cancel()   </li>
+</ul>
+<h2 id="5-AsyncTask的生命周期"><a href="#5-AsyncTask的生命周期" class="headerlink" title="5.AsyncTask的生命周期"></a>5.AsyncTask的生命周期</h2></li>
+<li><p>在Activity销毁之前,取消AsyncTask的运行,以此来保证程序的稳定 .</p>
+<h2 id="6-AsyncTask结果丢失"><a href="#6-AsyncTask结果丢失" class="headerlink" title="6.AsyncTask结果丢失"></a>6.AsyncTask结果丢失</h2></li>
+<li><p>由于屏幕旋转,Activity在内存紧张时被回收等情况下,Activity会被重新创建,此时旧的AsyncTask持有旧的Activity引用,这个时候会导致AsyncTask的onPostExecute()对UI更新无效</p>
+<h2 id="7-AsyncTask并行or串行"><a href="#7-AsyncTask并行or串行" class="headerlink" title="7.AsyncTask并行or串行"></a>7.AsyncTask并行or串行</h2></li>
+<li>AsyncTask在Android 2.3之前默认采用并行执行任务,AsyncTask在Android 2.3之后默认采用串行执行任务</li>
+<li>如果需要在Android 2.3之后采用并行执行任务,可以调用AsyncTask的executeOnExecutor()</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/06/asyncTask/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Handler" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -191,9 +306,11 @@
 <li>handler对象负责把消息push到消息队列中，以及接收Looper从消息队列中取出的消息</li>
 </ul>
 <h2 id="3-Handler导致的内存泄漏问题"><a href="#3-Handler导致的内存泄漏问题" class="headerlink" title="3.Handler导致的内存泄漏问题"></a>3.Handler导致的内存泄漏问题</h2></li>
-<li>在Java中内部类或者匿名内部类都会隐私的持有外部类对象,而在Android中使用Handler的一般都是Activity,这就导致如handler还在执行中而actiivty finsh掉,activity就不能被正常销毁回收.进而GC的时候就导致JVM不能回收Activity,有可能多次操作后就OOM了.<ul>
-<li>把内部类换成static,static不会隐式持有外部对象.</li>
-<li>一般Handler导致的内存泄漏都是因为,消息处理是异步的.finsh的时候消息还在处理等待状态,这个时候可以在activity finsh的时候把handler移除掉,调用removeCallbacks方法移除.</li>
+<li>原因:非静态内部类持有外部类的匿名引用,导致Activity无法释放</li>
+<li>解决:<ul>
+<li>Handler内部持有外部Activity的弱引用</li>
+<li>Handler改为静态内部类</li>
+<li>Handler.removeCallback()</li>
 </ul>
 </li>
 </ul>

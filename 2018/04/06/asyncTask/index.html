@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Handler | Mr.Neal</title>
+  <title>AsyncTask | Mr.Neal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.什么是Handler handler通过发送和处理Message和Runnable对象来关联相对应线程的MessageQueue. 可以让对应的Message和Runable在未来的某个时间点进行相应处理. 让自己想要处理的耗时操作放在子线程,让更新UI的操作主在主线程.  2.Handler的机制原理 Handler机制是一个典型的生产者消费者模式–多个生产者一个消费者,该模式是处理线程安全">
-<meta name="keywords" content="随笔,Android">
+  <meta name="description" content="1. 什么是AsyncTack 它本质上就是一个封装了线程池和Handler的异步框架  2. AsyncTask的使用方法 三个参数 Integer -&amp;gt; Params 表示后台任务执行时的参数类型,该参数会传给AysncTask的doInBackground()方法. Integer -&amp;gt; Progress 表示后台任务的执行进度的参数类型,该参数会作为onProgressUpda">
+<meta name="keywords" content="随笔,android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Handler">
-<meta property="og:url" content="http://yoursite.com/2018/04/05/Handler/index.html">
+<meta property="og:title" content="AsyncTask">
+<meta property="og:url" content="http://yoursite.com/2018/04/06/asyncTask/index.html">
 <meta property="og:site_name" content="Mr.Neal">
-<meta property="og:description" content="1.什么是Handler handler通过发送和处理Message和Runnable对象来关联相对应线程的MessageQueue. 可以让对应的Message和Runable在未来的某个时间点进行相应处理. 让自己想要处理的耗时操作放在子线程,让更新UI的操作主在主线程.  2.Handler的机制原理 Handler机制是一个典型的生产者消费者模式–多个生产者一个消费者,该模式是处理线程安全">
+<meta property="og:description" content="1. 什么是AsyncTack 它本质上就是一个封装了线程池和Handler的异步框架  2. AsyncTask的使用方法 三个参数 Integer -&amp;gt; Params 表示后台任务执行时的参数类型,该参数会传给AysncTask的doInBackground()方法. Integer -&amp;gt; Progress 表示后台任务的执行进度的参数类型,该参数会作为onProgressUpda">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-24T09:45:58.554Z">
+<meta property="og:updated_time" content="2018-04-24T09:55:28.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Handler">
-<meta name="twitter:description" content="1.什么是Handler handler通过发送和处理Message和Runnable对象来关联相对应线程的MessageQueue. 可以让对应的Message和Runable在未来的某个时间点进行相应处理. 让自己想要处理的耗时操作放在子线程,让更新UI的操作主在主线程.  2.Handler的机制原理 Handler机制是一个典型的生产者消费者模式–多个生产者一个消费者,该模式是处理线程安全">
+<meta name="twitter:title" content="AsyncTask">
+<meta name="twitter:description" content="1. 什么是AsyncTack 它本质上就是一个封装了线程池和Handler的异步框架  2. AsyncTask的使用方法 三个参数 Integer -&amp;gt; Params 表示后台任务执行时的参数类型,该参数会传给AysncTask的doInBackground()方法. Integer -&amp;gt; Progress 表示后台任务的执行进度的参数类型,该参数会作为onProgressUpda">
   
     <link rel="alternative" href="/atom.xml" title="Mr.Neal" type="application/atom+xml">
   
@@ -159,48 +159,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Handler" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-asyncTask" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Handler
+      AsyncTask
     </h1>
   
 
         
-        <a href="/2018/04/05/Handler/" class="archive-article-date">
-  	<time datetime="2018-04-05T07:10:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-05</time>
+        <a href="/2018/04/06/asyncTask/" class="archive-article-date">
+  	<time datetime="2018-04-06T06:29:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-什么是Handler"><a href="#1-什么是Handler" class="headerlink" title="1.什么是Handler"></a>1.什么是Handler</h2><ul>
-<li>handler通过发送和处理Message和Runnable对象来关联相对应线程的MessageQueue.</li>
-<li>可以让对应的Message和Runable在未来的某个时间点进行相应处理.</li>
-<li>让自己想要处理的耗时操作放在子线程,让更新UI的操作主在主线程.</li>
+        <h2 id="1-什么是AsyncTack"><a href="#1-什么是AsyncTack" class="headerlink" title="1. 什么是AsyncTack"></a>1. 什么是AsyncTack</h2><ul>
+<li>它本质上就是一个封装了线程池和Handler的异步框架</li>
 </ul>
-<h2 id="2-Handler的机制原理"><a href="#2-Handler的机制原理" class="headerlink" title="2.Handler的机制原理"></a>2.Handler的机制原理</h2><ul>
-<li>Handler机制是一个典型的生产者消费者模式–多个生产者一个消费者,该模式是处理线程安全的一个经典模式.</li>
-<li><p>Handler机制有几个核心类:Handler,Looper,Message,MessageQueue.</p>
-<ul>
-<li>Message对象，表示要传递的一个消息,内部使用链表数据结构实现一个消息池，用于重复利用，避免大量创建消息对象，造成内存浪费</li>
-<li>MessageQueue对象，存放消息对象的消息队列，先进先出原则</li>
-<li>Looper对象负责管理当前线程的消息队列</li>
-<li>handler对象负责把消息push到消息队列中，以及接收Looper从消息队列中取出的消息</li>
-</ul>
-<h2 id="3-Handler导致的内存泄漏问题"><a href="#3-Handler导致的内存泄漏问题" class="headerlink" title="3.Handler导致的内存泄漏问题"></a>3.Handler导致的内存泄漏问题</h2></li>
-<li>原因:非静态内部类持有外部类的匿名引用,导致Activity无法释放</li>
-<li>解决:<ul>
-<li>Handler内部持有外部Activity的弱引用</li>
-<li>Handler改为静态内部类</li>
-<li>Handler.removeCallback()</li>
+<h2 id="2-AsyncTask的使用方法"><a href="#2-AsyncTask的使用方法" class="headerlink" title="2. AsyncTask的使用方法"></a>2. AsyncTask的使用方法</h2><ul>
+<li>三个参数<ul>
+<li>Integer -&gt; Params 表示后台任务执行时的参数类型,该参数会传给AysncTask的doInBackground()方法.</li>
+<li>Integer -&gt; Progress 表示后台任务的执行进度的参数类型,该参数会作为onProgressUpdate()方法的参数.</li>
+<li>String -&gt; Result 表示后台任务的返回结果的参数类型,该参数会作为onPostExecute()方法的参数.</li>
 </ul>
 </li>
+<li><p>五个方法</p>
+<ul>
+<li>onPreExecute():异步任务开启之前回调,在主线程中执行.</li>
+<li>doInBackground():执行异步任务,在线程池中执行.</li>
+<li>onProgressUpdate():当doInBackground中调用publishProgress时回调,在主线程中执行.</li>
+<li>onPostExecute():在异步任务执行之后回调,在主线程中执行.</li>
+<li>onCancelled():在异步任务被取消时回调.</li>
+</ul>
+<h2 id="3-AsyncTask的机制原理"><a href="#3-AsyncTask的机制原理" class="headerlink" title="3.AsyncTask的机制原理"></a>3.AsyncTask的机制原理</h2></li>
+<li>AsyncTask的本质是一个静态的线程池,AsyncTask派生出的子类可以实现不同的异步任务,这些任务都是提交到静态线程池中执行.</li>
+<li>线程池中的工作线程执行doInBackground(mParams)方法执行异步任务</li>
+<li><p>当任务状态改变之后,工作线程向UI线程发送消息,AsyncTask内部的InternalHander响应这些消息,并调相关的回调函数.</p>
+<h2 id="4-AsyncTask的内存泄露"><a href="#4-AsyncTask的内存泄露" class="headerlink" title="4.AsyncTask的内存泄露"></a>4.AsyncTask的内存泄露</h2></li>
+<li>原因: 非静态内部类持有外部类的匿名引用,导致Activity无法释放</li>
+<li><p>解决:</p>
+<ul>
+<li>AsyncTask内部持有外部Activity的弱引用</li>
+<li>AsyncTask改为静态内部类</li>
+<li>AsyncTask.cancel()   </li>
+</ul>
+<h2 id="5-AsyncTask的生命周期"><a href="#5-AsyncTask的生命周期" class="headerlink" title="5.AsyncTask的生命周期"></a>5.AsyncTask的生命周期</h2></li>
+<li><p>在Activity销毁之前,取消AsyncTask的运行,以此来保证程序的稳定 .</p>
+<h2 id="6-AsyncTask结果丢失"><a href="#6-AsyncTask结果丢失" class="headerlink" title="6.AsyncTask结果丢失"></a>6.AsyncTask结果丢失</h2></li>
+<li><p>由于屏幕旋转,Activity在内存紧张时被回收等情况下,Activity会被重新创建,此时旧的AsyncTask持有旧的Activity引用,这个时候会导致AsyncTask的onPostExecute()对UI更新无效</p>
+<h2 id="7-AsyncTask并行or串行"><a href="#7-AsyncTask并行or串行" class="headerlink" title="7.AsyncTask并行or串行"></a>7.AsyncTask并行or串行</h2></li>
+<li>AsyncTask在Android 2.3之前默认采用并行执行任务,AsyncTask在Android 2.3之后默认采用串行执行任务</li>
+<li>如果需要在Android 2.3之后采用并行执行任务,可以调用AsyncTask的executeOnExecutor()</li>
 </ul>
 
       
@@ -240,7 +255,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
         		</li>
       		
 		</ul>
@@ -296,7 +311,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/05/Handler/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/06/asyncTask/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,18 +325,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/04/06/asyncTask/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          AsyncTask
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/04/android-binder/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Binder</div>
+    <a href="/2018/04/05/Handler/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Handler</div>
       <i class="icon-circle-right"></i>
     </a>
   
