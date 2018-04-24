@@ -156,6 +156,104 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Handler" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/05/Handler/">Handler</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/05/Handler/" class="archive-article-date">
+  	<time datetime="2018-04-05T07:10:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-什么是Handler"><a href="#1-什么是Handler" class="headerlink" title="1.什么是Handler"></a>1.什么是Handler</h2><ul>
+<li>handler通过发送和处理Message和Runnable对象来关联相对应线程的MessageQueue.</li>
+<li>可以让对应的Message和Runable在未来的某个时间点进行相应处理.</li>
+<li>让自己想要处理的耗时操作放在子线程,让更新UI的操作主在主线程.</li>
+</ul>
+<h2 id="2-Handler的机制原理"><a href="#2-Handler的机制原理" class="headerlink" title="2.Handler的机制原理"></a>2.Handler的机制原理</h2><ul>
+<li>Handler机制是一个典型的生产者消费者模式–多个生产者一个消费者,该模式是处理线程安全的一个经典模式.</li>
+<li><p>Handler机制有几个核心类:Handler,Looper,Message,MessageQueue.</p>
+<ul>
+<li>Message对象，表示要传递的一个消息,内部使用链表数据结构实现一个消息池，用于重复利用，避免大量创建消息对象，造成内存浪费</li>
+<li>MessageQueue对象，存放消息对象的消息队列，先进先出原则</li>
+<li>Looper对象负责管理当前线程的消息队列</li>
+<li>handler对象负责把消息push到消息队列中，以及接收Looper从消息队列中取出的消息</li>
+</ul>
+<h2 id="3-Handler导致的内存泄漏问题"><a href="#3-Handler导致的内存泄漏问题" class="headerlink" title="3.Handler导致的内存泄漏问题"></a>3.Handler导致的内存泄漏问题</h2></li>
+<li>在Java中内部类或者匿名内部类都会隐私的持有外部类对象,而在Android中使用Handler的一般都是Activity,这就导致如handler还在执行中而actiivty finsh掉,activity就不能被正常销毁回收.进而GC的时候就导致JVM不能回收Activity,有可能多次操作后就OOM了.<ul>
+<li>把内部类换成static,static不会隐式持有外部对象.</li>
+<li>一般Handler导致的内存泄漏都是因为,消息处理是异步的.finsh的时候消息还在处理等待状态,这个时候可以在activity finsh的时候把handler移除掉,调用removeCallbacks方法移除.</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/05/Handler/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-android-binder" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -265,8 +363,15 @@
       
         <h2 id="1-WebView常见的问题"><a href="#1-WebView常见的问题" class="headerlink" title="1. WebView常见的问题"></a>1. WebView常见的问题</h2><ul>
 <li>Android API level 16以及之前的版本存在远程代码执行安全漏洞,该漏洞源于程序没有正确限制使用WebView.addJavascriptInterface方法,远程攻击者通过使用Java Reflection API利用该漏洞执行任意Java对象的方法.</li>
-<li>WebView内存泄露的问题.
-        
+<li>WebView内存泄露的问题.<ul>
+<li>独立进程,开启单独的进程给WebView使用.需要用到进程之间通信,比较麻烦.</li>
+<li>动态去添加WebView,动态添加WebView意思在布局创建一个ViewGroup用来放置WebView,Activty创建时add添加进来,在Activity结束是remove掉.</li>
+</ul>
+</li>
+<li>WebView硬件加速导致页面渲染问题.在WebView加载的时候暂时关闭硬件加速.<h2 id="2-JsBridge"><a href="#2-JsBridge" class="headerlink" title="2. JsBridge"></a>2. JsBridge</h2></li>
+<li>是java和js互通框架WebViewJavascriptBridge是移动UIView和Html交互通信的桥梁,就是实现java和js的互相调用的桥梁,替代了WebView的自带的JavascriptInterface的接口,使得我们的开发更加灵活和安全.</li>
+</ul>
+
       
 
       
@@ -344,8 +449,40 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-广播的定义"><a href="#1-广播的定义" class="headerlink" title="1. 广播的定义"></a>1. 广播的定义</h2><ul>
-<li>在Android中,Broadcast是一种广泛运用的在应用程序之间传输信息的机制,Android中我们要发送的广播内容是一个Intent,这个Intent中可以携带我们要传送的数据.
-        
+<li>在Android中,Broadcast是一种广泛运用的在应用程序之间传输信息的机制,Android中我们要发送的广播内容是一个Intent,这个Intent中可以携带我们要传送的数据.</li>
+</ul>
+<h2 id="2-广播的使用场景"><a href="#2-广播的使用场景" class="headerlink" title="2. 广播的使用场景"></a>2. 广播的使用场景</h2><ul>
+<li>同一app具有多个进程的不同组件之间的消息通信</li>
+<li>不同app之间的组件之间的消息通信</li>
+</ul>
+<h2 id="3-广播种类"><a href="#3-广播种类" class="headerlink" title="3. 广播种类"></a>3. 广播种类</h2><ul>
+<li>Normal Broadcast(普通广播): Context.sendBroadcast</li>
+<li>System Broadcast(系统广播): Context.sendBroadcast</li>
+<li>Ordered Broadcast(有序广播):Context.sendOrdereBroadcast</li>
+<li>Local Broadcast: 只在自身App内传播</li>
+</ul>
+<h2 id="4-实现广播"><a href="#4-实现广播" class="headerlink" title="4. 实现广播"></a>4. 实现广播</h2><ul>
+<li>静态注册:注册完成一直运行</li>
+<li>动态注册:跟随activity的生命周期</li>
+</ul>
+<h2 id="5-内部实现机制"><a href="#5-内部实现机制" class="headerlink" title="5. 内部实现机制"></a>5. 内部实现机制</h2><ul>
+<li>自定义广播接收者BroadcastReceiver,并复写onReceiver()方法</li>
+<li>通过Binder机制向AMS(Activity Manager Service)进行注册</li>
+<li>广播发送者通过Binder机制向AMS发送广播</li>
+<li>AMS查找符合相应条件(IntentFilter/Permission等)的BroadcastReceiver,将广播发送到BroadcastReceiver(一般情况下是Actvitiy)相应对列中</li>
+<li>消息循环执行拿到些广播,回调BroadcastReceiver中的onReceive()方法</li>
+</ul>
+<h2 id="6-LocalBroadcastManager优势"><a href="#6-LocalBroadcastManager优势" class="headerlink" title="6. LocalBroadcastManager优势"></a>6. LocalBroadcastManager优势</h2><ul>
+<li>使用它发送的广播只在自身App内传播,因此你不必担心泄露隐私数据</li>
+<li>其它App无法对你的App发送该广播,因为你的App根本就不可能接收到非自身应用发送的该广播,因此你不必担心有安全漏洞可以利用</li>
+<li>比系统的全局广播更高效</li>
+</ul>
+<h2 id="7-LocalBroadcastManager详解"><a href="#7-LocalBroadcastManager详解" class="headerlink" title="7. LocalBroadcastManager详解"></a>7. LocalBroadcastManager详解</h2><ul>
+<li>LocalBroadcastManager高效的原因主要是因为它内部是通过Handler实现的,它的sendBroadcast()方法含义并非和我们平时所用的一样,它的sendBroadcast()方法其实是通过handler发送一个Message实现的</li>
+<li>既然是它内部是通过Handler来实现广播的发送的,那么相比与系统广播通过Binder实现那肯定是更高效,同时使用Handler来实现,别的应用无法向我们的应用发送该广播,而我们应用内发送的广播也不会离开我们的应用</li>
+<li>LocalBroadcastManager内部协作主要是靠这两个Map集合:mReceivers和Actions,当然还有一个List集合mPendingBroadcasts,这个主要就是存储待接收的广播对象</li>
+</ul>
+
       
 
       
@@ -423,8 +560,41 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-Service是什么"><a href="#1-Service是什么" class="headerlink" title="1. Service是什么"></a>1. Service是什么</h2><p>Service(服务)是一个一种可以在后台执行长时间运行操作而没有用户界面的应用组件.</p>
-<h2 id="2-Service与Thread的区别"><a href="#2-Service与Thread的区别" class="headerlink" title="2. Service与Thread的区别"></a>2. Service与Thread的区别</h2>
-        
+<h2 id="2-Service与Thread的区别"><a href="#2-Service与Thread的区别" class="headerlink" title="2. Service与Thread的区别"></a>2. Service与Thread的区别</h2><ul>
+<li>定义<ul>
+<li>Thread:是程序执行的最小单元,它是分配CPU的单位,Android系统中UI线程的一种,当然Thread还可以用于执行一些耗时异步的操作.</li>
+<li>Service:是Android的一种机制,服务是运行在主线程,不能做耗时操作,它是由系统进程托管.它是一种轻量级的IPC通信.ActivityService是在不同的进程中.它们的通信需要IPC通信进行操作.</li>
+</ul>
+</li>
+<li>实际开发 <ul>
+<li>Thread:在Android系统中,线程一般是指工作线程,后台线程,一般进行耗时操作.而主线程是一种特殊的工作线程, 它只是负责处理一些UI线程的绘制,UI线程不能做耗时操作.</li>
+<li>Service:是Android系统中的组件,一般情况运行在主线程上的,因此在Service中是不可以执行耗时操作的,否则系统会报ANR异常,之所以称Service为后台服务,大部分原因是它本身没有UI,用户无法感知,但如果需要让Service执行耗时任务,可在Service中开启单独线程去执行.</li>
+</ul>
+</li>
+<li>应用场景<ul>
+<li>Thread:当要执行耗时的网络或者数据库查询以及其他阻塞UI线程或密集使用CPU的任务时,都应该使用工作线程(Thread)这样才能保证UI线程不被占用而影响用户体验.</li>
+<li>Service:在应用程序中,如果需要长时间的在后台运行,而且不需要交互的情况下,使用服务.比如播放音乐,通过Service+Notification方式在后台执行同时在通知栏显示着.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-Service创建服务"><a href="#3-Service创建服务" class="headerlink" title="3. Service创建服务"></a>3. Service创建服务</h2><ul>
+<li><p>startService</p>
+<ul>
+<li>定义一个类继承service</li>
+<li>在Manifest.xml文件中配置service</li>
+<li>使用Context的startService(Intent)方法启动Service</li>
+<li>不再使用时,调用soptService(Intent)方法停止该服务</li>
+</ul>
+</li>
+<li><p>bindService</p>
+<ul>
+<li>创建BindService服务端,继承自Service并在类中,创建一个实现IBinder接口的实例对象并提供公共方法给客户端调用.</li>
+<li>从onBind()回调方法返回此Binder实例</li>
+<li>在客户端中,从onServiceConnected()回调方法接收Binder,并使用提供的方法调用绑定服务.</li>
+</ul>
+</li>
+</ul>
+
       
 
       
@@ -502,8 +672,24 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-Fragment为什么被称为第五大组件"><a href="#1-Fragment为什么被称为第五大组件" class="headerlink" title="1. Fragment为什么被称为第五大组件"></a>1. Fragment为什么被称为第五大组件</h2><p>首先Fragment的使用次数是不输于其他四大组件的,而且Fragment有自己的生命周期,比Activity更加节省内存.Fragment的存在必须依附于Activity,并且与Activity一样,拥有自己的生命周期,同时处理用户的交互动作.</p>
-<h2 id="2-Fragment加载到Activity的两种方式"><a href="#2-Fragment加载到Activity的两种方式" class="headerlink" title="2. Fragment加载到Activity的两种方式"></a>2. Fragment加载到Activity的两种方式</h2>
-        
+<h2 id="2-Fragment加载到Activity的两种方式"><a href="#2-Fragment加载到Activity的两种方式" class="headerlink" title="2. Fragment加载到Activity的两种方式"></a>2. Fragment加载到Activity的两种方式</h2><ul>
+<li>添加Fragment到Activity的布局文件中</li>
+<li>动态在Activity中添加fragment,使用FragmentManager添加一个FragmentTransaction的实例用add()方法加上fragment对象,调用commit()方法.</li>
+</ul>
+<h2 id="3-FragmentPagerAdapter与FragmentStatePagerAdapter区别"><a href="#3-FragmentPagerAdapter与FragmentStatePagerAdapter区别" class="headerlink" title="3. FragmentPagerAdapter与FragmentStatePagerAdapter区别"></a>3. FragmentPagerAdapter与FragmentStatePagerAdapter区别</h2><ul>
+<li>FragmentPagerAdapter适用于页面较少的情况,FragmentStatePagerAdapter适用于页面较多的情况</li>
+<li>FragmentStatePagerAdapter在原码中destoryItem()方法中用的是remove()方法.</li>
+<li>FragmnetPagerAdapter在原码中destoryltem()方法中用的是detach()方法.</li>
+<li>FragmentStatePagerAdapter每次换是回收内存,适合页面比较多的情况.</li>
+<li>FragmentPagerAdapter并没有回收内存,只是ui分离,适合页面比较少的情况.</li>
+</ul>
+<h2 id="4-Fragment生命周期"><a href="#4-Fragment生命周期" class="headerlink" title="4. Fragment生命周期"></a>4. Fragment生命周期</h2><p>Activity(onCreate()) -&gt; Fragment(onAttaht()) -&gt; Fragment(onCreate()) -&gt; Fragment(onCreateView()) -&gt; Fragment(onActivityCreate()) -&gt; Activity(onStart()) -&gt; Fragment(onStart()) -&gt; Activity(onResume()) -&gt; Fragment(onResume()) -&gt; Fragment(onPause()) -&gt; Activity(onPause) -&gt; Fragment(onStop()) -&gt; Activity(onStop()) -&gt; Fragment(onDesoryView()) -&gt; Fragment(onDesory())  -&gt; Fragment(onDeatch()) -&gt;Activity(onDesory())</p>
+<h2 id="5-Fragment通信"><a href="#5-Fragment通信" class="headerlink" title="5.  Fragment通信"></a>5.  Fragment通信</h2><ul>
+<li>在Fragment中调用Activity的方法 getActvivity()</li>
+<li>在Activity中调用Fragment的方法 接口回调</li>
+<li>在Fragment中调用Fragment的方法 findFragmentByid</li>
+</ul>
+
       
 
       
@@ -581,8 +767,79 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-什么是activity"><a href="#1-什么是activity" class="headerlink" title="1. 什么是activity?"></a>1. 什么是activity?</h2><p>activity本身是用户能够操作的活动界面</p>
-<h2 id="2-activity的4种状态"><a href="#2-activity的4种状态" class="headerlink" title="2. activity的4种状态?"></a>2. activity的4种状态?</h2>
-        
+<h2 id="2-activity的4种状态"><a href="#2-activity的4种状态" class="headerlink" title="2. activity的4种状态?"></a>2. activity的4种状态?</h2><ul>
+<li>running <ul>
+<li>activity活动状态用户可以交互的一种状态,它一个处于栈顶的状态</li>
+</ul>
+</li>
+<li>paused<ul>
+<li>activity失去焦点或者非全屏的activity占据再或者被一个透明的activity放置在栈顶它会处于paused状态,它只是失去了用户对它的交互,并不是说它被销毁了,但一种情况是在内存不够的时候被系统回收.</li>
+</ul>
+</li>
+<li>stopped<ul>
+<li>当一个activity全屏覆盖了另一个activity的时候它处于stopped状态,这个时候它不是在可见的,如果内存不够的时候它会被系统回收.</li>
+</ul>
+</li>
+<li>killed<ul>
+<li>它已经被系统回收掉了.它保存的信息状态成员变量全部不存在了.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-activity的生命周期"><a href="#3-activity的生命周期" class="headerlink" title="3. activity的生命周期?"></a>3. activity的生命周期?</h2><ul>
+<li>onCreate()方法:<ul>
+<li>activity被创建的时候回调生命周期第一个调用的方法.在里面做一些初始化操作,设置一些布局的资源当然也可以做些数据的加载,图片的预加载.</li>
+</ul>
+</li>
+<li>onStart()方法:<ul>
+<li>表明activity正在启动,activity已经处于用户可见状态,没有处于前台显示,不可以交互</li>
+</ul>
+</li>
+<li>onResume()方法:<ul>
+<li>表明activity已经处于用户可见状态,处于前台显示状态,可以与用户进行交互.</li>
+</ul>
+</li>
+<li>onPause()方法:<ul>
+<li>表明activity已经处于暂停状态,activity可见状态,不可以交互.</li>
+</ul>
+</li>
+<li>onStop()方法:<ul>
+<li>表明activity已经处于停止状态,activity不可见状态,不可以交互.没有被销毁</li>
+</ul>
+</li>
+<li>onDestroy()方法:<ul>
+<li>表明activity已经被销毁,activity不可见状态.</li>
+</ul>
+</li>
+<li>onRestart()方法:<ul>
+<li>表明activity重新开始.如果activity没有被销毁重新调用.</li>
+</ul>
+</li>
+<li>activity启动 -&gt; onCreate() -&gt; onStart() -&gt; onResume() </li>
+<li>点击home键回到主界面 -&gt; onPause() -&gt; onStop()</li>
+<li>当我们再次回到原activity时 -&gt; onRestart() -&gt; onStart() -&gt; onResume()</li>
+<li>退出当前activity时 -&gt; onPause() -&gt; onStop() -&gt; onDestroy()</li>
+<li>activity切换时 -&gt; (A)onPause -&gt; (B)onCreate -&gt; (B)onStart -&gt; (B)onResume -&gt; (A)onStop</li>
+</ul>
+<h2 id="4-activity的启动模式"><a href="#4-activity的启动模式" class="headerlink" title="4. activity的启动模式"></a>4. activity的启动模式</h2><ul>
+<li>standard 标准模式<ul>
+<li>默认启动模式,每次启动一个Activity都会又一次创建一个新的实例入栈，无论这个实例是否存在.</li>
+</ul>
+</li>
+<li>singleTop 栈顶复用模式<ul>
+<li>分两种处理情况：须要创建的Activity已经处于栈顶时,此时会直接复用栈顶的Activity.不会再创建新的Activity,若须要创建的Activity不处于栈顶,此时会又一次创建一个新的Activity入栈，同Standard模式一样.若情况一中栈顶的Activity被直接复用时,它的onCreate、onStart不会被系统调用,由于它并没有发生改变.可是一个新的方法 onNewIntent会被回调（Activity被正常创建时不会回调此方法).</li>
+</ul>
+</li>
+<li>singleTask 栈内复用模式<ul>
+<li>若须要创建的Activity已经处于栈中时,此时不会创建新的Activity,而是将存在栈中的Activity上面的其他Activity所有销毁,使它成为栈顶.同SingleTop 模式中的情况一同样,仅仅会又一次回调Activity中的 onNewIntent方法.</li>
+</ul>
+</li>
+<li>singleInstance 单实例模式<ul>
+<li>SingleInstance比较特殊,是全局单例模式,是一种加强的SingleTask模式.它除了具有它所有特性外,还加强了一点：具有此模式的Activity仅仅能单独位于一个任务栈中.</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-scheme协议"><a href="#5-scheme协议" class="headerlink" title="5. scheme协议"></a>5. scheme协议</h2><p>android中scheme是一种页面内跳转协议,是一种非常好的实现机制,通过定义自己的scheme协议,<br>可以非常方便跳转app中的各个页面;通过scheme协议,服务器可以定制化告诉app跳转到那个页面,<br>可以通过通知栏消息定制化跳转页面,可以通过H5页面跳转到页面等.</p>
+
       
 
       
@@ -811,6 +1068,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
               </li>
              
               <li class="article-tag-list-item">
