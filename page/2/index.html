@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Activity | Mr.Neal</title>
+  <title>Mr.Neal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 什么是activity? activity本身是用户能够操作的活动界面2. activity的4种状态? running  activity活动状态用户可以交互的一种状态,它一个处于栈顶的状态   paused activity失去焦点或者非全屏的activity占据再或者被一个透明的activity放置在栈顶它会处于paused状态,它只是失去了用户对它的交互,并不是说它被销毁了,但一种情">
-<meta name="keywords" content="随笔,Android">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Activity">
-<meta property="og:url" content="http://yoursite.com/2018/04/02/android-activity/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Mr.Neal">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Mr.Neal">
-<meta property="og:description" content="1. 什么是activity? activity本身是用户能够操作的活动界面2. activity的4种状态? running  activity活动状态用户可以交互的一种状态,它一个处于栈顶的状态   paused activity失去焦点或者非全屏的activity占据再或者被一个透明的activity放置在栈顶它会处于paused状态,它只是失去了用户对它的交互,并不是说它被销毁了,但一种情">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-25T07:11:46.659Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Activity">
-<meta name="twitter:description" content="1. 什么是activity? activity本身是用户能够操作的活动界面2. activity的4种状态? running  activity活动状态用户可以交互的一种状态,它一个处于栈顶的状态   paused activity失去焦点或者非全屏的activity占据再或者被一个透明的activity放置在栈顶它会处于paused状态,它只是失去了用户对它的交互,并不是说它被销毁了,但一种情">
+<meta name="twitter:title" content="Mr.Neal">
   
     <link rel="alternative" href="/atom.xml" title="Mr.Neal" type="application/atom+xml">
   
@@ -159,125 +154,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-android-activity" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Activity
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/14/hello-world/">面向对象的基本概念</a>
     </h1>
   
 
         
-        <a href="/2018/04/02/android-activity/" class="archive-article-date">
-  	<time datetime="2018-04-02T02:19:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
+        <a href="/2018/03/14/hello-world/" class="archive-article-date">
+  	<time datetime="2018-03-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-什么是activity"><a href="#1-什么是activity" class="headerlink" title="1. 什么是activity?"></a>1. 什么是activity?</h2><ul>
-<li>activity本身是用户能够操作的活动界面<h2 id="2-activity的4种状态"><a href="#2-activity的4种状态" class="headerlink" title="2. activity的4种状态?"></a>2. activity的4种状态?</h2></li>
-<li>running <ul>
-<li>activity活动状态用户可以交互的一种状态,它一个处于栈顶的状态</li>
-</ul>
-</li>
-<li>paused<ul>
-<li>activity失去焦点或者非全屏的activity占据再或者被一个透明的activity放置在栈顶它会处于paused状态,它只是失去了用户对它的交互,并不是说它被销毁了,但一种情况是在内存不够的时候被系统回收.</li>
-</ul>
-</li>
-<li>stopped<ul>
-<li>当一个activity全屏覆盖了另一个activity的时候它处于stopped状态,这个时候它不是在可见的,如果内存不够的时候它会被系统回收.</li>
-</ul>
-</li>
-<li>killed<ul>
-<li>它已经被系统回收掉了.它保存的信息状态成员变量全部不存在了.</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-activity的生命周期"><a href="#3-activity的生命周期" class="headerlink" title="3. activity的生命周期?"></a>3. activity的生命周期?</h2><ul>
-<li>onCreate()方法:<ul>
-<li>activity被创建的时候回调生命周期第一个调用的方法.在里面做一些初始化操作,设置一些布局的资源当然也可以做些数据的加载,图片的预加载.</li>
-</ul>
-</li>
-<li>onStart()方法:<ul>
-<li>表明activity正在启动,activity已经处于用户可见状态,没有处于前台显示,不可以交互</li>
-</ul>
-</li>
-<li>onResume()方法:<ul>
-<li>表明activity已经处于用户可见状态,处于前台显示状态,可以与用户进行交互.</li>
-</ul>
-</li>
-<li>onPause()方法:<ul>
-<li>表明activity已经处于暂停状态,activity可见状态,不可以交互.</li>
-</ul>
-</li>
-<li>onStop()方法:<ul>
-<li>表明activity已经处于停止状态,activity不可见状态,不可以交互.没有被销毁</li>
-</ul>
-</li>
-<li>onDestroy()方法:<ul>
-<li>表明activity已经被销毁,activity不可见状态.</li>
-</ul>
-</li>
-<li>onRestart()方法:<ul>
-<li>表明activity重新开始.如果activity没有被销毁重新调用.</li>
-</ul>
-</li>
-<li>activity启动 -&gt; onCreate() -&gt; onStart() -&gt; onResume() </li>
-<li>点击home键回到主界面 -&gt; onPause() -&gt; onStop()</li>
-<li>当我们再次回到原activity时 -&gt; onRestart() -&gt; onStart() -&gt; onResume()</li>
-<li>退出当前activity时 -&gt; onPause() -&gt; onStop() -&gt; onDestroy()</li>
-<li>activity切换时 -&gt; (A)onPause -&gt; (B)onCreate -&gt; (B)onStart -&gt; (B)onResume -&gt; (A)onStop</li>
-</ul>
-<h2 id="4-activity的启动模式"><a href="#4-activity的启动模式" class="headerlink" title="4. activity的启动模式"></a>4. activity的启动模式</h2><ul>
-<li>standard 标准模式<ul>
-<li>默认启动模式,每次启动一个Activity都会又一次创建一个新的实例入栈，无论这个实例是否存在.</li>
-</ul>
-</li>
-<li>singleTop 栈顶复用模式<ul>
-<li>分两种处理情况：须要创建的Activity已经处于栈顶时,此时会直接复用栈顶的Activity.不会再创建新的Activity,若须要创建的Activity不处于栈顶,此时会又一次创建一个新的Activity入栈，同Standard模式一样.若情况一中栈顶的Activity被直接复用时,它的onCreate、onStart不会被系统调用,由于它并没有发生改变.可是一个新的方法 onNewIntent会被回调（Activity被正常创建时不会回调此方法).</li>
-</ul>
-</li>
-<li>singleTask 栈内复用模式<ul>
-<li>若须要创建的Activity已经处于栈中时,此时不会创建新的Activity,而是将存在栈中的Activity上面的其他Activity所有销毁,使它成为栈顶.同SingleTop 模式中的情况一同样,仅仅会又一次回调Activity中的 onNewIntent方法.</li>
-</ul>
-</li>
-<li>singleInstance 单实例模式<ul>
-<li>SingleInstance比较特殊,是全局单例模式,是一种加强的SingleTask模式.它除了具有它所有特性外,还加强了一点：具有此模式的Activity仅仅能单独位于一个任务栈中.</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-scheme协议"><a href="#5-scheme协议" class="headerlink" title="5. scheme协议"></a>5. scheme协议</h2><ul>
-<li>android中scheme是一种页面内跳转协议,是一种非常好的实现机制,通过定义自己的scheme协议,<br>可以非常方便跳转app中的各个页面;通过scheme协议,服务器可以定制化告诉app跳转到那个页面,<br>可以通过通知栏消息定制化跳转页面,可以通过H5页面跳转到页面等.</li>
+        <ul>
+<li>本质上就是解决如何用程序描述世界的问题</li>
+<li>讨论如何把实际奉存在的东西映射成程序的类和对象</li>
+<li>一种程序设计的思路思想方法</li>
 </ul>
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -292,7 +198,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -301,84 +207,16 @@
       
 
       
-
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/14/hello-world/">展开全文 >></a>
+        </p>
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/02/android-activity/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/04/02/android-fragment/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Fragment
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/03/14/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">面向对象的基本概念</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -398,14 +236,12 @@
 
 
 
-  
-  
-  
 
   
-
   
-
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -428,8 +264,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
