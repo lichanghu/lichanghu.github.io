@@ -156,6 +156,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-handlerThread" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/07/handlerThread/">HandlerThread</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/07/handlerThread/" class="archive-article-date">
+  	<time datetime="2018-04-07T02:08:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-HandlerThread产生背景"><a href="#1-HandlerThread产生背景" class="headerlink" title="1. HandlerThread产生背景"></a>1. HandlerThread产生背景</h2><ul>
+<li>当系统有多个耗时任务需要执行时,每个任务都会开启一个新线程去执行耗时任务,这样会导致系统多次创建和销毁线程,从而影响性能.为了解决这一问题,Google提供了HandlerThread,HandlerThread是在线程中创建一个Looper循环器,让Looper轮询消息队列,当有耗时任务进入队列时,则不需要开启新线程,在原有的线程中执行耗时任务即可,否则线程阻塞.</li>
+</ul>
+<h2 id="2-HanlderThread的特点"><a href="#2-HanlderThread的特点" class="headerlink" title="2. HanlderThread的特点"></a>2. HanlderThread的特点</h2><ul>
+<li>HandlerThread本质上是一个线程,继承自Thread</li>
+<li>HandlerThread有自己的Looper对象,可以进行Looper循环,可以创建Handler</li>
+<li>HandlerThread可以在Handler的handlerMessage中执行异步方法</li>
+<li>HandlerThread优点是异步不会堵塞,减少对性能的消耗</li>
+<li>HandlerThread缺点是不能同时继续进行多任务处理,需要等待进行处理,处理效率较低</li>
+<li>HandlerThread与线程池不同,HandlerThread是一个串行队列,背后只有一个线程</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/07/handlerThread/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-asyncTask" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
