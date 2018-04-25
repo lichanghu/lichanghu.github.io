@@ -156,6 +156,116 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-View" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/09/View/">View</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/09/View/" class="archive-article-date">
+  	<time datetime="2018-04-09T08:39:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-Android视图工作机制按顺序分为以下三步"><a href="#1-Android视图工作机制按顺序分为以下三步" class="headerlink" title="1. Android视图工作机制按顺序分为以下三步"></a>1. Android视图工作机制按顺序分为以下三步</h2><ul>
+<li>measure:确定View的宽高</li>
+<li>layout:确定View的位置</li>
+<li>draw:绘制出View的形状</li>
+</ul>
+<h2 id="2-Android视图工作机制之MeasureSpec"><a href="#2-Android视图工作机制之MeasureSpec" class="headerlink" title="2. Android视图工作机制之MeasureSpec"></a>2. Android视图工作机制之MeasureSpec</h2><ul>
+<li>MeasureSpec类是决定View的measure过程的测量规格(比喻:尺子),它由以下两部分组成<ul>
+<li>SpecMode:测量模式(比喻:直尺,三角尺等不同类型)</li>
+<li>SpecSize:测量模式下的规格大小(比喻:尺子的刻度)</li>
+</ul>
+</li>
+<li>MeasureSpec的表示形式是32位的int值<ul>
+<li>高2位(前面2位):表示测量模式,即SpecMode</li>
+<li>低30位(后面30位):表示在测量模式下的测量规格大小,即SpecSize</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-Android视图工作机制中的重绘"><a href="#3-Android视图工作机制中的重绘" class="headerlink" title="3. Android视图工作机制中的重绘"></a>3. Android视图工作机制中的重绘</h2><ul>
+<li><p>invalidate()和requestLayout()</p>
+<ul>
+<li>invalidate方法只会执行onDraw方法</li>
+<li>requestLayout方法只会执行onMeasure方法和onLayout方法,并不会执行onDraw方法.</li>
+</ul>
+</li>
+<li><p>总结:所以当我们进行View更新时,若仅View的显示内容发生改变且新显示内容不影响View的大小,位置,则只需调用invalidate方法;若View宽高,位置发生改变且显示内容不变,只需调用requestLayout方法;若两者均发生改变,则需调用两者,按照View的绘制流程,推荐先调用requestLayout方法再调用invalidate方法</p>
+</li>
+<li><p>invalidate()和postInvalidate()</p>
+<ul>
+<li>invalidate方法用于UI线程中重新绘制视图</li>
+<li>postInvalidate方法用于非UI线程中重新绘制视图，省去使用handler</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/09/View/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-IntentService" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -177,7 +287,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-IntentService是什么"><a href="#1-IntentService是什么" class="headerlink" title="1.IntentService是什么"></a>1.IntentService是什么</h2><ul>
-<li>IntentService是继承自Service并处理异步请求的一个类，其内部采用HandlerThread和Handler实现的，在IntentService内有一个工作线程来处理耗时操作，其优先级比普通Service高。当任务完成后，IntentService会自动停止，而不需要手动调用stopSelf()。另外，可以多次启动IntentService，每个耗时操作都会以工作队列的方式在IntentService中onHandlerIntent()回调方法中执行，并且每次只会执行一个工作线程</li>
+<li>IntentService是继承自Service并处理异步请求的一个类,其内部采用HandlerThread和Handler实现的,在IntentService内有一个工作线程来处理耗时操作,其优先级比普通Service高.当任务完成后,IntentService会自动停止,而不需要手动调用stopSelf().另外,可以多次启动IntentService,每个耗时操作都会以工作队列的方式在IntentService中onHandlerIntent()回调方法中执行,并且每次只会执行一个工作线程</li>
 </ul>
 <h2 id="2-IntentService使用方法"><a href="#2-IntentService使用方法" class="headerlink" title="2.IntentService使用方法"></a>2.IntentService使用方法</h2><ul>
 <li>创建Service继承自IntentService</li>
@@ -1013,160 +1123,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/02/android-fragment/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-android-activity" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/02/android-activity/">Activity</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/02/android-activity/" class="archive-article-date">
-  	<time datetime="2018-04-02T02:19:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-什么是activity"><a href="#1-什么是activity" class="headerlink" title="1. 什么是activity?"></a>1. 什么是activity?</h2><ul>
-<li>activity本身是用户能够操作的活动界面</li>
-</ul>
-<h2 id="2-activity的4种状态"><a href="#2-activity的4种状态" class="headerlink" title="2. activity的4种状态?"></a>2. activity的4种状态?</h2><ul>
-<li>running <ul>
-<li>activity活动状态用户可以交互的一种状态,它一个处于栈顶的状态</li>
-</ul>
-</li>
-<li>paused<ul>
-<li>activity失去焦点或者非全屏的activity占据再或者被一个透明的activity放置在栈顶它会处于paused状态,它只是失去了用户对它的交互,并不是说它被销毁了,但一种情况是在内存不够的时候被系统回收.</li>
-</ul>
-</li>
-<li>stopped<ul>
-<li>当一个activity全屏覆盖了另一个activity的时候它处于stopped状态,这个时候它不是在可见的,如果内存不够的时候它会被系统回收.</li>
-</ul>
-</li>
-<li>killed<ul>
-<li>它已经被系统回收掉了.它保存的信息状态成员变量全部不存在了.</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-activity的生命周期"><a href="#3-activity的生命周期" class="headerlink" title="3. activity的生命周期?"></a>3. activity的生命周期?</h2><ul>
-<li>onCreate()方法:<ul>
-<li>activity被创建的时候回调生命周期第一个调用的方法.在里面做一些初始化操作,设置一些布局的资源当然也可以做些数据的加载,图片的预加载.</li>
-</ul>
-</li>
-<li>onStart()方法:<ul>
-<li>表明activity正在启动,activity已经处于用户可见状态,没有处于前台显示,不可以交互</li>
-</ul>
-</li>
-<li>onResume()方法:<ul>
-<li>表明activity已经处于用户可见状态,处于前台显示状态,可以与用户进行交互.</li>
-</ul>
-</li>
-<li>onPause()方法:<ul>
-<li>表明activity已经处于暂停状态,activity可见状态,不可以交互.</li>
-</ul>
-</li>
-<li>onStop()方法:<ul>
-<li>表明activity已经处于停止状态,activity不可见状态,不可以交互.没有被销毁</li>
-</ul>
-</li>
-<li>onDestroy()方法:<ul>
-<li>表明activity已经被销毁,activity不可见状态.</li>
-</ul>
-</li>
-<li>onRestart()方法:<ul>
-<li>表明activity重新开始.如果activity没有被销毁重新调用.</li>
-</ul>
-</li>
-<li>activity启动 -&gt; onCreate() -&gt; onStart() -&gt; onResume() </li>
-<li>点击home键回到主界面 -&gt; onPause() -&gt; onStop()</li>
-<li>当我们再次回到原activity时 -&gt; onRestart() -&gt; onStart() -&gt; onResume()</li>
-<li>退出当前activity时 -&gt; onPause() -&gt; onStop() -&gt; onDestroy()</li>
-<li>activity切换时 -&gt; (A)onPause -&gt; (B)onCreate -&gt; (B)onStart -&gt; (B)onResume -&gt; (A)onStop</li>
-</ul>
-<h2 id="4-activity的启动模式"><a href="#4-activity的启动模式" class="headerlink" title="4. activity的启动模式"></a>4. activity的启动模式</h2><ul>
-<li>standard 标准模式<ul>
-<li>默认启动模式,每次启动一个Activity都会又一次创建一个新的实例入栈，无论这个实例是否存在.</li>
-</ul>
-</li>
-<li>singleTop 栈顶复用模式<ul>
-<li>分两种处理情况：须要创建的Activity已经处于栈顶时,此时会直接复用栈顶的Activity.不会再创建新的Activity,若须要创建的Activity不处于栈顶,此时会又一次创建一个新的Activity入栈，同Standard模式一样.若情况一中栈顶的Activity被直接复用时,它的onCreate、onStart不会被系统调用,由于它并没有发生改变.可是一个新的方法 onNewIntent会被回调（Activity被正常创建时不会回调此方法).</li>
-</ul>
-</li>
-<li>singleTask 栈内复用模式<ul>
-<li>若须要创建的Activity已经处于栈中时,此时不会创建新的Activity,而是将存在栈中的Activity上面的其他Activity所有销毁,使它成为栈顶.同SingleTop 模式中的情况一同样,仅仅会又一次回调Activity中的 onNewIntent方法.</li>
-</ul>
-</li>
-<li>singleInstance 单实例模式<ul>
-<li>SingleInstance比较特殊,是全局单例模式,是一种加强的SingleTask模式.它除了具有它所有特性外,还加强了一点：具有此模式的Activity仅仅能单独位于一个任务栈中.</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-scheme协议"><a href="#5-scheme协议" class="headerlink" title="5. scheme协议"></a>5. scheme协议</h2><ul>
-<li>android中scheme是一种页面内跳转协议,是一种非常好的实现机制,通过定义自己的scheme协议,<br>可以非常方便跳转app中的各个页面;通过scheme协议,服务器可以定制化告诉app跳转到那个页面,<br>可以通过通知栏消息定制化跳转页面,可以通过H5页面跳转到页面等.</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/02/android-activity/">展开全文 >></a>
         </p>
       
 
