@@ -156,6 +156,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-事件分发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/10/事件分发/">dispatchTouchEvent,onInterceptTouchEvent,onTouchEvent</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/10/事件分发/" class="archive-article-date">
+  	<time datetime="2018-04-10T09:52:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-为什么会有事件分发机制"><a href="#1-为什么会有事件分发机制" class="headerlink" title="1. 为什么会有事件分发机制"></a>1. 为什么会有事件分发机制</h2><ul>
+<li>安卓上面的View是树形结构的,View可能会重叠在一起,当点击的地方有多个View可以响应的时候,这个点击事件应该给谁呢?为了解决这个问题,就有了事件分发机制.</li>
+</ul>
+<h2 id="2-三个重要的事件分发的方法"><a href="#2-三个重要的事件分发的方法" class="headerlink" title="2. 三个重要的事件分发的方法"></a>2. 三个重要的事件分发的方法</h2><ul>
+<li>dispatchTouchEvent <ul>
+<li>return true:表示该View内部消化掉了所有事件</li>
+<li>return false:表示事件在本层不再继续进行分发,并交由上层控件的onTouchEvent方法进行消费</li>
+<li>return super.dispatchTouchEvent(ev):默认事件将分发给本层的事件拦截onInterceptTouchEvent方法进行处理</li>
+</ul>
+</li>
+<li>onInterceptTouchEvent<ul>
+<li>return true:表示将事件进行拦截,并将拦截到的事件交由本层控件的onTouchEvent进行处理</li>
+<li>return false:表示不对事件进行拦截,事件得以成功分发到子View</li>
+<li>return super.onInterceptTouchEvent(ev):默认表示不拦截该事件,并将事件传递给下一层View的dispatchTouchEvent</li>
+</ul>
+</li>
+<li>onTouchEvent<ul>
+<li>return true:表示onTouchEvent处理完事件后消费了此次事件</li>
+<li>return fasle:表示不响应事件,那么该事件将会不断向上层View的onTouchEvent方法传递,直到某个View的onTouchEvent方法返回true</li>
+<li>return super.dispatchTouchEvent(ev):表示不响应事件,结果与return false一样</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-简要的谈谈Android的事件分发机制"><a href="#3-简要的谈谈Android的事件分发机制" class="headerlink" title="3.简要的谈谈Android的事件分发机制"></a>3.简要的谈谈Android的事件分发机制</h2><ul>
+<li>当点击事件发生时,首先Activity将TouchEvent传递给Window,再从Window传递给顶层View.TouchEvent会最先到达最顶层 view 的 dispatchTouchEvent,然后由dispatchTouchEvent方法进行分发,如果dispatchTouchEvent返回true ,则整个事件将会被销毁,如果dispatchTouchEvent返回 false,则交给上层view的onTouchEvent方法来开始处理这个事件,如果 interceptTouchEvent 返回 true,也就是拦截掉了,则交给自身的 onTouchEvent 来处理,如果 interceptTouchEvent 返回 false,那么事件将继续传递给子 view,由子 view 的 dispatchTouchEvent 再来开始这个事件的分发.如果事件传递到某一层的子 view 的 onTouchEvent 上了,且这个方法返回了false ,那么这个事件会从这个 view 往上传递,都是 onTouchEvent 来接收,直到onTouchEvent返回true为止.而如果传递到最顶view的 onTouchEvent 也返回 false 的话,这个事件就会消失.</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/10/事件分发/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-View" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1024,105 +1127,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/03/android-service/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-android-fragment" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/02/android-fragment/">Fragment</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/02/android-fragment/" class="archive-article-date">
-  	<time datetime="2018-04-02T06:24:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-Fragment为什么被称为第五大组件"><a href="#1-Fragment为什么被称为第五大组件" class="headerlink" title="1. Fragment为什么被称为第五大组件"></a>1. Fragment为什么被称为第五大组件</h2><ul>
-<li>首先Fragment的使用次数是不输于其他四大组件的,而且Fragment有自己的生命周期,比Activity更加节省内存.Fragment的存在必须依附于Activity,并且与Activity一样,拥有自己的生命周期,同时处理用户的交互动作.</li>
-</ul>
-<h2 id="2-Fragment加载到Activity的两种方式"><a href="#2-Fragment加载到Activity的两种方式" class="headerlink" title="2. Fragment加载到Activity的两种方式"></a>2. Fragment加载到Activity的两种方式</h2><ul>
-<li>添加Fragment到Activity的布局文件中</li>
-<li>动态在Activity中添加fragment,使用FragmentManager添加一个FragmentTransaction的实例用add()方法加上fragment对象,调用commit()方法.</li>
-</ul>
-<h2 id="3-FragmentPagerAdapter与FragmentStatePagerAdapter区别"><a href="#3-FragmentPagerAdapter与FragmentStatePagerAdapter区别" class="headerlink" title="3. FragmentPagerAdapter与FragmentStatePagerAdapter区别"></a>3. FragmentPagerAdapter与FragmentStatePagerAdapter区别</h2><ul>
-<li>FragmentPagerAdapter适用于页面较少的情况,FragmentStatePagerAdapter适用于页面较多的情况</li>
-<li>FragmentStatePagerAdapter在原码中destoryItem()方法中用的是remove()方法.</li>
-<li>FragmnetPagerAdapter在原码中destoryltem()方法中用的是detach()方法.</li>
-<li>FragmentStatePagerAdapter每次换是回收内存,适合页面比较多的情况.</li>
-<li>FragmentPagerAdapter并没有回收内存,只是ui分离,适合页面比较少的情况.</li>
-</ul>
-<h2 id="4-Fragment生命周期"><a href="#4-Fragment生命周期" class="headerlink" title="4. Fragment生命周期"></a>4. Fragment生命周期</h2><ul>
-<li>Activity(onCreate()) -&gt; Fragment(onAttaht()) -&gt; Fragment(onCreate()) -&gt; Fragment(onCreateView()) -&gt; Fragment(onActivityCreate()) -&gt; Activity(onStart()) -&gt; Fragment(onStart()) -&gt; Activity(onResume()) -&gt; Fragment(onResume()) -&gt; Fragment(onPause()) -&gt; Activity(onPause) -&gt; Fragment(onStop()) -&gt; Activity(onStop()) -&gt; Fragment(onDesoryView()) -&gt; Fragment(onDesory())  -&gt; Fragment(onDeatch()) -&gt;Activity(onDesory())</li>
-</ul>
-<h2 id="5-Fragment通信"><a href="#5-Fragment通信" class="headerlink" title="5.  Fragment通信"></a>5.  Fragment通信</h2><ul>
-<li>在Fragment中调用Activity的方法 getActvivity()</li>
-<li>在Activity中调用Fragment的方法 接口回调</li>
-<li>在Fragment中调用Fragment的方法 findFragmentByid</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/02/android-fragment/">展开全文 >></a>
         </p>
       
 
