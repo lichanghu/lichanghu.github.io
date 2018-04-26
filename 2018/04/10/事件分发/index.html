@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>dispatchTouchEvent,onInterceptTouchEvent,onTouchEvent | Mr.Neal</title>
+  <title>Android事件分发机制 | Mr.Neal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1. 为什么会有事件分发机制 安卓上面的View是树形结构的,View可能会重叠在一起,当点击的地方有多个View可以响应的时候,这个点击事件应该给谁呢?为了解决这个问题,就有了事件分发机制.  2. 三个重要的事件分发的方法 dispatchTouchEvent  return true:表示该View内部消化掉了所有事件 return false:表示事件在本层不再继续进行分发,并交由上层控件">
 <meta name="keywords" content="随笔,Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="dispatchTouchEvent,onInterceptTouchEvent,onTouchEvent">
+<meta property="og:title" content="Android事件分发机制">
 <meta property="og:url" content="http://yoursite.com/2018/04/10/事件分发/index.html">
 <meta property="og:site_name" content="Mr.Neal">
 <meta property="og:description" content="1. 为什么会有事件分发机制 安卓上面的View是树形结构的,View可能会重叠在一起,当点击的地方有多个View可以响应的时候,这个点击事件应该给谁呢?为了解决这个问题,就有了事件分发机制.  2. 三个重要的事件分发的方法 dispatchTouchEvent  return true:表示该View内部消化掉了所有事件 return false:表示事件在本层不再继续进行分发,并交由上层控件">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-26T07:37:10.822Z">
+<meta property="og:updated_time" content="2018-04-26T07:42:57.635Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dispatchTouchEvent,onInterceptTouchEvent,onTouchEvent">
+<meta name="twitter:title" content="Android事件分发机制">
 <meta name="twitter:description" content="1. 为什么会有事件分发机制 安卓上面的View是树形结构的,View可能会重叠在一起,当点击的地方有多个View可以响应的时候,这个点击事件应该给谁呢?为了解决这个问题,就有了事件分发机制.  2. 三个重要的事件分发的方法 dispatchTouchEvent  return true:表示该View内部消化掉了所有事件 return false:表示事件在本层不再继续进行分发,并交由上层控件">
   
     <link rel="alternative" href="/atom.xml" title="Mr.Neal" type="application/atom+xml">
@@ -166,7 +166,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      dispatchTouchEvent,onInterceptTouchEvent,onTouchEvent
+      Android事件分发机制
     </h1>
   
 
